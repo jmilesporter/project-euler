@@ -1,5 +1,38 @@
 <script>
-	let answer = 0;
+	function fibonacci(limit) {
+		let fibonacci = [];
+		let n2 = 0;
+		let n1 = 1;
+		let current = 0;
+		let oldCurrent;
+		let oldN1;
+		while (current < limit) {
+			current = n2 + n1;
+			oldN1 = n1;
+			n2 = oldN1;
+			oldCurrent = current;
+			n1 = oldCurrent;
+
+			fibonacci.push(current);
+		}
+		return fibonacci.slice(0, fibonacci.length - 1);
+	}
+
+	function evenFibonacciArray(array) {
+		return array.filter((n) => n % 2 === 0);
+	}
+
+	function sum(evenNumbers) {
+		return evenNumbers.reduce((a, b) => a + b, 0);
+	}
+
+	let fibonacciArray = fibonacci(4000000);
+
+	let evenNumbers = evenFibonacciArray(fibonacciArray);
+
+	let answer = sum(evenNumbers);
+
+	console.log(answer);
 </script>
 
 <h1>Problem 2</h1>
