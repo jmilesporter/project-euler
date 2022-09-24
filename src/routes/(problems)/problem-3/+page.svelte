@@ -1,29 +1,46 @@
 <script>
-	function largestPrimeFactor(number) {
-		let array = [];
-		let primes = [];
-		let multiple = 2;
-		for (let i = 0; i < number; i++) {
-			if (array.some((n) => n === multiple)) {
-				multiple++;
-			} else {
-				for (let j = multiple; j < number; j += multiple) {
-					if (j === multiple) {
-						primes.push(j);
-					} else {
-						array.push(j);
-					}
-				}
-				multiple++;
+	let number = 600851475143;
+	let primes = [];
+	function isPrime(n) {
+		if (n < 2) {
+			return false;
+		}
+		for (let i = 2; i <= Math.sqrt(n); i++) {
+			if (n % i === 0) {
+				return false;
 			}
 		}
-		let primeFactors = [];
-		primes.filter((n) => number % n === 0).forEach((n) => primeFactors.push(n));
-		return Math.max(...primeFactors);
+		return true;
 	}
+	function primesList(number) {
+		for (let i = 2; i <= Math.sqrt(number); i++) {
+			if (isPrime(i)) {
+				primes.push(i);
+			}
+		}
+	}
+	primesList(number);
+	let factors = [];
+	function factorsList(number) {
+		for (let i = 0; i < Math.sqrt(number); i++) {
+			if (number % i === 0) {
+				factors.push(i);
+			}
+		}
+	}
+	factorsList(number);
 
-	let answer = largestPrimeFactor(99999);
-	console.log(answer);
+	function largestPrimeFactor(A, B) {
+		let primeFactors = A.filter((n) => B.includes(n));
+		if (primeFactors.length === 0) {
+			return 'no prime factors';
+		} else {
+			return Math.max(...primeFactors);
+		}
+	}
+	console.log(factors, primes);
+
+	let answer = largestPrimeFactor(factors, primes);
 </script>
 
 <h1>Problem 3</h1>
